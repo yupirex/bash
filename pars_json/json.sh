@@ -1,4 +1,5 @@
-!/usr/bin/bash
+#!/usr/bin/env bash
+
 jq_string(){ :
     jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]'
 }
@@ -17,7 +18,7 @@ declare -A json_pars
 < <( < test_json sed 's/\\n/\\\\n/g' | jq_string ) f1 "."
 
 
-echo -e "${json_pars[.message.text]}"
+#echo -e "${json_pars[.message.text]}"
 Fprint(){ :
     for key in "${!json_pars[@]}"; do
         echo "$key = ${json_pars[$key]}"
